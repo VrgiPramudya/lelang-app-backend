@@ -1,0 +1,22 @@
+{
+  "name": "seattle-app-backend",
+  "version": "1.0.0",
+  "description": "Rest API for Seattle App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
+  },
+  "author": "pplgskansaka.com",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^21.3.9",
+    "@hapi/joi": "^17.1.1",
+    "@hapi/jwt": "^3.2.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "joi": "^17.13.3",
+    "mysql2": "^3.9.4",
+    "nodemon": "^3.1.0"
+  }
+}
