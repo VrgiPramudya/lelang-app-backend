@@ -24,6 +24,7 @@ const HistoryServices = require('./services/HistoryServices');
 
 // Validator
 const TokenManager = require('./tokenize/tokenManager');
+const RegisterServices = require('./services/RegisterServices');
 
 const init = async () => {
     const pool = mysql.createPool({
@@ -43,7 +44,8 @@ const init = async () => {
     const barangService = new BarangServices(pool)
     const lelangService = new LelangServices(pool)
     const historyService = new HistoryServices(pool)
-    const penawaranSevice = new PenawaranServices(pool)
+    const penawaranService = new PenawaranServices(pool)
+    const registerService = new RegisterServices(pool)
 
     const server = Hapi.server({ 
         port: 2000,
@@ -70,11 +72,10 @@ const init = async () => {
             maxAgeSec: 86400
         },
         validate: (artifacts) => {
-            console.log("Decoded JWT Payload:", artifacts.decoded.payload); // Debugging
             return {
                 isValid: true,
                 credentials: {
-                    id: artifacts.decoded.payload.id, // Pastikan ini ada
+                    id: artifacts.decoded.payload.id, 
                     role: artifacts.decoded.payload.role
                 }
             };
@@ -85,8 +86,8 @@ const init = async () => {
     await server.register([
         {
             plugin: registerPlugin,
-            option: {
-                service: userService
+            options: {
+                service: registerService
             }
         },
         {
@@ -124,7 +125,7 @@ const init = async () => {
         {
             plugin: penawaranPlugin,
             options: {
-                service: penawaranSevice
+                service: penawaranService
             }
         },
         {

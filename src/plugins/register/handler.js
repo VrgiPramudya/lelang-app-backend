@@ -8,11 +8,11 @@ class RegisterHandler{
 
     registerUserHandler = async (request, h) => {
         const { nama_lengkap, username, password, telp } = request.payload
-
+        
         const saltRounds = 10;
         const passHash = bcrypt.hashSync(password,saltRounds);
 
-        const cekUsername = await this._service.getUserByUsername(username)
+        const cekUsername = await this._service.cekUserByUsername(username)
 
         if(cekUsername.length > 0){
             return h.response({
@@ -21,11 +21,11 @@ class RegisterHandler{
             }).code(409)
         }
 
-        this._service.addUser(nama_lengkap, username, password, passHash,telp)
+        this._service.userRegister(nama_lengkap, username, passHash,telp)
 
         const response = h.response({
             status: 'success',
-            message: 'Berhasil menambahkan siswa'
+            message: 'Registrasi berhasil'
         })
 
         response.code(201)
