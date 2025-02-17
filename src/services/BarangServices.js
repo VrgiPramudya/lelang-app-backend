@@ -3,8 +3,8 @@ class BarangServices{
         this._pool = pool;
     }
 
-    async addBarang({nama_barang, tanggal, harga_awal, deskripsi_barang}){
-        const[result] = await this._pool.execute('INSERT INTO tb_barang (nama_barang, tanggal, harga_awal, deskripsi_barang) VALUES (:nama_barang, :tanggal, :harga_awal, :deskripsi_barang)', { nama_barang, tanggal, harga_awal, deskripsi_barang })
+    async addBarang({foto, nama_barang, tanggal, harga_awal, deskripsi_barang}){
+        const[result] = await this._pool.execute('INSERT INTO tb_barang (foto, nama_barang, tanggal, harga_awal, deskripsi_barang) VALUES (:foto, :nama_barang, :tanggal, :harga_awal, :deskripsi_barang)', { foto, nama_barang, tanggal, harga_awal, deskripsi_barang })
         console.log(result)
         return result.InsertId
     }
@@ -19,8 +19,8 @@ class BarangServices{
         return rows
     }
 
-    async editBarangById(id_barang, {nama_barang, tanggal, harga_awal, deskripsi_barang}){
-        const[result] = await this._pool.execute('UPDATE tb_barang SET nama_barang=:nama_barang, tanggal=:tanggal, harga_awal=:harga_awal, deskripsi_barang=:deskripsi_barang WHERE id_barang=:id_barang', {nama_barang, tanggal, harga_awal, deskripsi_barang, id_barang})
+    async editBarangById(id_barang, {foto, nama_barang, tanggal, harga_awal, deskripsi_barang}){
+        const[result] = await this._pool.execute('UPDATE tb_barang SET foto=:foto, nama_barang=:nama_barang, tanggal=:tanggal, harga_awal=:harga_awal, deskripsi_barang=:deskripsi_barang WHERE id_barang=:id_barang', {foto, nama_barang, tanggal, harga_awal, deskripsi_barang, id_barang})
         return result.affectedRows
     }
 
