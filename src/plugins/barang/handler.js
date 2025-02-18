@@ -73,38 +73,73 @@ class BarangHandler{
         }).code(200);
     }
 
-    updateBarangHandler = async (request, h) => {
+    async updateBarangHandler(request, h) {
         try {
             const { role } = request.auth.credentials;
             if (role !== "Admin") {
                 return h.response({
-                    status: 'fail',
-                    message: 'Anda tidak memiliki akses'
+                    status: "fail",
+                    message: "Anda tidak memiliki akses"
                 }).code(401);
             }
 
             const { id } = request.params;
-            const { nama_barang, tanggal, harga_awal, deskripsi_barang } = request.payload;
+            const { foto, nama_barang, tanggal, harga_awal, deskripsi_barang } = request.payload;
             const cekBarang = await this._service.getBarangById(id);
 
             if (cekBarang.length === 0) {
                 return h.response({
-                    status: 'fail',
-                    message: 'Data barang tidak ditemukan'
+                    status: "fail",
+                    message: "Data barang tidak ditemukan"
                 }).code(404);
             }
 
-            await this._service.editBarangById(id, { nama_barang, tanggal, harga_awal, deskripsi_barang });
+            let imgPath = cekBarang[0].foto; // Default pakai foto lama
+
+            // Jika ada file gambar baru diunggah
+            if (foto && foto.hapi && foto.hapi.filename) {
+                const uploadDir = path.join(__dirname, "../../uploads");
+                if (!fs.existsSync(uploadDir)) {
+                    fs.mkdirSync(uploadDir, { recursive: true });
+                }
+
+                const filename = `${Date.now()}-${foto.hapi.filename}`;
+                imgPath = path.join(uploadDir, filename);
+                const fileStream = fs.createWriteStream(imgPath);
+
+                await new Promise((resolve, reject) => {
+                    foto.pipe(fileStream);
+                    foto.on("end", resolve);
+                    foto.on("error", reject);
+                });
+
+                // Hapus gambar lama jika ada
+                if (cekBarang[0].foto) {
+                    try {
+                        fs.unlinkSync(cekBarang[0].foto);
+                    } catch (err) {
+                        console.error("Gagal menghapus gambar lama:", err);
+                    }
+                }
+            }
+
+            await this._service.editBarangById(id, {
+                foto: imgPath,
+                nama_barang,
+                tanggal,
+                harga_awal,
+                deskripsi_barang
+            });
 
             return h.response({
-                status: 'success',
-                message: 'Data barang berhasil diubah',
+                status: "success",
+                message: "Data barang berhasil diubah"
             }).code(200);
         } catch (err) {
             return h.response({
-                status: 'fail',
-                message: err.message,
-            }).code(400);
+                status: "fail",
+                message: err.message
+            }).code(500);
         }
     }
 

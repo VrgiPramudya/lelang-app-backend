@@ -33,14 +33,21 @@ const routesBarang = (handler) => [
         }
     },
     {
-        method: 'PUT',
-        path: '/barang/{id}',
+        method: "PUT",
+        path: "/barang/{id}",
         handler: handler.updateBarangHandler,
         options: {
-            auth: 'lelang_jwt',
+            auth: "lelang_jwt",
+            payload: {
+                maxBytes: 10485760, // Maksimal 10MB
+                output: "stream",
+                parse: true,
+                multipart: true
+            },
             validate: {
                 payload: Joi.object({
-                    nama_barang : Joi.string(),
+                    foto: Joi.object().optional(),
+                    nama_barang: Joi.string(),
                     tanggal: Joi.date(),
                     harga_awal: Joi.number(),
                     deskripsi_barang: Joi.string()
