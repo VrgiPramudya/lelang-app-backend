@@ -2,14 +2,21 @@ const Joi = require("@hapi/joi")
 
 const routesBarang = (handler) => [
     {
-        method : 'POST',
-        path : '/barang',
-        handler : handler.addBarangHandler,
+        method: 'POST',
+        path: '/barang',
+        handler: handler.addBarangHandler,
         options: {
             auth: 'lelang_jwt',
+            payload: {
+                maxBytes: 10485760, // Maksimal 10MB untuk file
+                output: 'stream',  // Mengirim file sebagai stream
+                parse: true,
+                multipart: true
+            },
             validate: {
                 payload: Joi.object({
-                    nama_barang : Joi.string().required(),
+                    foto: Joi.object().required(),
+                    nama_barang: Joi.string().required(),
                     tanggal: Joi.date().required(),
                     harga_awal: Joi.number().required(),
                     deskripsi_barang: Joi.string().required()

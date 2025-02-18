@@ -1,12 +1,14 @@
+const fs = require('fs');
+const path = require('path');
+
 class BarangServices{
     constructor(pool){
         this._pool = pool;
     }
 
-    async addBarang({foto, nama_barang, tanggal, harga_awal, deskripsi_barang}){
-        const[result] = await this._pool.execute('INSERT INTO tb_barang (foto, nama_barang, tanggal, harga_awal, deskripsi_barang) VALUES (:foto, :nama_barang, :tanggal, :harga_awal, :deskripsi_barang)', { foto, nama_barang, tanggal, harga_awal, deskripsi_barang })
-        console.log(result)
-        return result.InsertId
+    async addBarang({ foto, nama_barang, tanggal, harga_awal, deskripsi_barang }) {
+        const [result] = await this._pool.execute('INSERT INTO tb_barang (foto, nama_barang, tanggal, harga_awal, deskripsi_barang) VALUES (:foto, :nama_barang, :tanggal, :harga_awal, :deskripsi_barang)',{foto, nama_barang, tanggal, harga_awal, deskripsi_barang});
+        return result.insertId;
     }
     
     async getBarang() {
