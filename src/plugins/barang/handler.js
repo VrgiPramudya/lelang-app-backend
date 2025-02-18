@@ -143,39 +143,52 @@ class BarangHandler{
         }
     }
 
-    deleteBarangHandler = async (request, h) => {
+    async deleteBarangHandler(request, h) {
         try {
             const { role } = request.auth.credentials;
             if (role !== "Admin") {
                 return h.response({
-                    status: 'fail',
-                    message: 'Anda tidak memiliki akses'
+                    status: "fail",
+                    message: "Anda tidak memiliki akses"
                 }).code(401);
             }
-            
+
             const { id } = request.params;
             const cekBarang = await this._service.getBarangById(id);
 
             if (cekBarang.length === 0) {
                 return h.response({
-                    status: 'fail',
-                    message: 'Data barang tidak ditemukan'
+                    status: "fail",
+                    message: "Data barang tidak ditemukan"
                 }).code(404);
+            }
+
+            // Cek apakah barang memiliki foto
+            const fotoPath = cekBarang[0].foto;
+            if (fotoPath) {
+                try {
+                    if (fs.existsSync(fotoPath)) {
+                        fs.unlinkSync(fotoPath);
+                    }
+                } catch (err) {
+                    console.error("Gagal menghapus foto:", err);
+                }
             }
 
             await this._service.deleteBarangById(id);
 
             return h.response({
-                status: 'success',
-                message: 'Data barang berhasil dihapus'
+                status: "success",
+                message: "Data barang berhasil dihapus"
             }).code(200);
         } catch (err) {
             return h.response({
-                status: 'fail',
-                message: err.message,
-            }).code(400);
+                status: "fail",
+                message: err.message
+            }).code(500);
         }
     }
+
 }
 
 module.exports = BarangHandler;
