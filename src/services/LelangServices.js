@@ -9,9 +9,11 @@ class LelangServices{
     }
     
     async getLelang() {
-        const [rows] = await this._pool.query('SELECT * FROM tb_lelang')
-        return rows
+        const [rows] = await this._pool.query(`SELECT * FROM tb_lelang JOIN tb_barang ON tb_lelang.id_barang = tb_barang.id_barang
+        `);
+        return rows;
     }
+    
 
     async getLelangById(id_lelang) {
         const [rows] = await this._pool.execute('SELECT * FROM tb_lelang WHERE id_lelang=:id_lelang', {id_lelang});

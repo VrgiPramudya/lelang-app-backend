@@ -15,6 +15,7 @@ const historyPlugin = require('./plugins/history');
 const registerPlugin = require('./plugins/register');
 
 // Service
+const RegisterServices = require('./services/RegisterServices');
 const AdminServices = require('./services/AdminServices');
 const PenawaranServices = require('./services/PenawaranServices');
 const UserServices = require('./services/UserServices');
@@ -22,9 +23,9 @@ const BarangServices = require('./services/BarangServices');
 const LelangServices = require('./services/LelangServices');
 const HistoryServices = require('./services/HistoryServices');
 
+
 // Validator
 const TokenManager = require('./tokenize/tokenManager');
-const RegisterServices = require('./services/RegisterServices');
 
 const init = async () => {
     const pool = mysql.createPool({
@@ -49,10 +50,24 @@ const init = async () => {
 
     const server = Hapi.server({ 
         port: 2000,
-        host: `localhost`,
+        host: `0.0.0.0`,
         routes: {
             cors: {
                 origin: ['*']
+            }
+        }
+    })
+
+    await server.register(require('@hapi/inert'));
+
+    server.route({
+        method:"GET",
+        path:"/file/{path*}",
+        handler:{
+            directory:{
+                path:"./src/uploads",
+                listing:false,
+                index:false,
             }
         }
     })

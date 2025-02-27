@@ -31,7 +31,8 @@ class BarangHandler{
             }
 
             const filename = `${Date.now()}-${foto.hapi.filename}`;
-            const imgPath = path.join(uploadDir, filename);
+            const imgPath = path.join('src/uploads', filename);
+            console.log(imgPath);
             const fileStream = fs.createWriteStream(imgPath);
 
             await new Promise((resolve, reject) => {
@@ -40,7 +41,7 @@ class BarangHandler{
                 foto.on('error', reject);
             });
 
-            await this._service.addBarang({ foto: imgPath, nama_barang, tanggal, harga_awal, deskripsi_barang });
+            await this._service.addBarang({ foto: filename, nama_barang, tanggal, harga_awal, deskripsi_barang });
         
             return h.response({
                 status: 'success',
@@ -105,7 +106,7 @@ class BarangHandler{
 
                 const filename = `${Date.now()}-${foto.hapi.filename}`;
                 imgPath = path.join(uploadDir, filename);
-                const fileStream = fs.createWriteStream(imgPath);
+                const fileStream = fs.createWriteStream(filename);
 
                 await new Promise((resolve, reject) => {
                     foto.pipe(fileStream);

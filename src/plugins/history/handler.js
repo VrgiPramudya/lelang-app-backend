@@ -20,9 +20,9 @@ class HistoryHandler{
             }).code(401)
         }
 
-        const {id_lelang} = request.payload
+        const {id_penawaran} = request.payload
 
-        this._service.addHistory({id_lelang})
+        this._service.addHistory({id_penawaran})
 
         const response = h.response({
             status: 'success',

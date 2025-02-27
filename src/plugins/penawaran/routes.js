@@ -22,15 +22,11 @@
             method: 'GET',
             path: '/penawaran',
             handler: handler.getPenawaranHandler,
-            options: {
-            }
         },
         {
             method: 'GET',
             path: '/penawaran/{id_penawaran}',
             handler: handler.getPenawaranByIdHandler,
-            options: {
-            }
         },
         {
             method: 'PUT',
@@ -40,7 +36,8 @@
                 auth: 'lelang_jwt',
                 validate: {
                     params: Joi.object({
-                        id_lelang: Joi.number()
+                        id_lelang: Joi.string(),
+                        id_penawaran: Joi.string()
                     }),
                     payload: Joi.object({
                         nominal: Joi.number().required()

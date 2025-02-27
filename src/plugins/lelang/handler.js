@@ -25,6 +25,14 @@ class LelangHandler{
             const {id_barang, tgl_lelang, status} = request.payload
 
             await this._service.addLelang({id_barang, tgl_lelang, status})
+            const cekBarang = await this._service.getBarangById(id);
+
+            if (cekBarang.length === 0) {
+                return h.response({
+                    status: "fail",
+                    message: "Data barang tidak ditemukan"
+                }).code(404);
+            }
 
             const response = h.response({
                 status: 'success',
@@ -43,16 +51,16 @@ class LelangHandler{
     }
 
     getLelangHandler = async(request, h) => {
-        const { role } = request.auth.credentials
+        // const { role } = request.auth.credentials
 
-        if (role != 'Admin' && role != "User") {
-            const response = h.response({
-                status: 'fail',
-                message: 'Anda tidak memiliki akses'
-            })
-            response.code(401)
-            return response
-        }
+        // if (role != 'Admin' && role != "User") {
+        //     const response = h.response({
+        //         status: 'fail',
+        //         message: 'Anda tidak memiliki akses'
+        //     })
+        //     response.code(401)
+        //     return response
+        // }
 
         const dataLelang = await this._service.getLelang()
 

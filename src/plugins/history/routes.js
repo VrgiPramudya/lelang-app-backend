@@ -7,11 +7,11 @@ const routesHistory = (handler) => [
         handler : handler.addHistoryHandler,
         options: {
             auth: 'lelang_jwt',
-            validate: {
-                // payload: Joi.object({
-                //     id_lelang: Joi.required(),
-                // })
-            }
+            // validate: {
+            //     payload: Joi.object({
+            //         id_lelang: Joi.required(),
+            //     })
+            // }
         }
     },
     {

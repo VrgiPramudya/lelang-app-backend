@@ -19,13 +19,43 @@ class PenawaranServices{
     
     
     async getPenawaran() {
-        const [rows] = await this._pool.query('SELECT * FROM tb_penawaran')
-        console.log(rows)
-        return rows
+        const query = `
+            SELECT 
+                p.id_penawaran, 
+                p.nominal, 
+                u.username, 
+                l.id_lelang, 
+                l.tgl_lelang, 
+                l.status, 
+                b.nama_barang, 
+                b.harga_awal
+            FROM tb_penawaran p
+            JOIN tb_lelang l ON p.id_lelang = l.id_lelang
+            JOIN tb_barang b ON l.id_barang = b.id_barang
+            JOIN tb_user u ON p.user_id = u.user_id
+        `;
+    
+        const [rows] = await this._pool.query(query);
+        console.log(rows);
+        return rows;
     }
+    
 
     async getPenawaranById(id_penawaran) {
-        const [rows] = await this._pool.execute('SELECT * FROM tb_penawaran WHERE id_penawaran=:id_penawaran', {id_penawaran});
+        const [rows] = await this._pool.execute(`SELECT 
+                p.id_penawaran, 
+                p.nominal, 
+                u.username, 
+                l.id_lelang, 
+                l.tgl_lelang, 
+                l.status, 
+                b.nama_barang, 
+                b.harga_awal
+            FROM tb_penawaran p
+            JOIN tb_lelang l ON p.id_lelang = l.id_lelang
+            JOIN tb_barang b ON l.id_barang = b.id_barang
+            JOIN tb_user u ON p.user_id = u.user_id
+            WHERE id_penawaran=:id_penawaran`, {id_penawaran});
         return rows
     }
 

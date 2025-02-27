@@ -11,7 +11,7 @@ const routesLelang = (handler) => [
                 payload: Joi.object({
                     id_barang: Joi.number().required(),
                     tgl_lelang: Joi.date().required(),
-                    status: Joi.required()
+                    status: Joi.optional()
                 })
             }
         }
@@ -20,9 +20,9 @@ const routesLelang = (handler) => [
         method: 'GET',
         path: '/lelang',
         handler: handler.getLelangHandler,
-        options: {
-            auth: 'lelang_jwt'
-        }
+        // options: {
+        //     auth: 'lelang_jwt'
+        // }
     },
     {
         method: 'GET',
