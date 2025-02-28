@@ -134,7 +134,8 @@ const init = async () => {
         {
             plugin: lelangPlugin,
             options: {
-                service: lelangService
+                lelangService: lelangService,
+                barangService: barangService
             }
         },
         {
