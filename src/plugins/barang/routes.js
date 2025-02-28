@@ -28,9 +28,9 @@ const routesBarang = (handler) => [
         method: 'GET',
         path: '/barang',
         handler: handler.getBarangHandler,
-        options: {
-            auth: 'lelang_jwt'
-        }
+        // options: {
+        //     auth: 'lelang_jwt'
+        // }
     },
     {
         method: "PUT",

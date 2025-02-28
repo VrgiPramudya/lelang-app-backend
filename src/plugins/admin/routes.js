@@ -5,15 +5,15 @@ const routesAdmin = (handler) => [
         method : 'POST',
         path : '/admin',
         handler : handler.addAdminHandler,
-        options: {
-            auth: 'lelang_jwt',
-            validate: {
-                payload: Joi.object({
-                    username: Joi.string().max(20).required(),
-                    password: Joi.string().min(8).required()
-                })
-            }
-        }
+        // options: {
+        //     auth: 'lelang_jwt',
+        //     validate: {
+        //         payload: Joi.object({
+        //             username: Joi.string().max(20).required(),
+        //             password: Joi.string().min(8).required()
+        //         })
+        //     }
+        // }
     },
     {
         method: 'GET',

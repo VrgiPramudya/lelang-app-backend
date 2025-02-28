@@ -12,14 +12,14 @@ class UserHandler{
 
     addUserHandler = async (request, h) => {
         try {
-            const {credentials} = request.auth
+            // const {credentials} = request.auth
 
-            if(credentials.role != "Admin"){
-                return h.response({
-                    status: 'fail',
-                    message: 'Anda tidak memiliki akses'
-                }).code(401)
-            }
+            // if(credentials.role != "Admin"){
+            //     return h.response({
+            //         status: 'fail',
+            //         message: 'Anda tidak memiliki akses'
+            //     }).code(401)
+            // }
                 
             const { nama_lengkap, username, password, telp } = request.payload
 
@@ -50,14 +50,14 @@ class UserHandler{
     }
 
     getUserHandler = async(request, h) => {
-        const {credentials} = request.auth
+        // const {credentials} = request.auth
 
-        if(credentials.role != "Admin" && credentials.role != "Petugas"){
-            return h.response({
-                status: 'fail',
-                message: 'Anda tidak memiliki akses'
-            }).code(401)
-        }
+        // if(credentials.role != "Admin"){
+        //     return h.response({
+        //         status: 'fail',
+        //         message: 'Anda tidak memiliki akses'
+        //     }).code(401)
+        // }
             
         const dataUser = await this._service.getUser()
 

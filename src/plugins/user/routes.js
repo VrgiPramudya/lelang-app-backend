@@ -5,33 +5,33 @@ const routesUser = (handler) => [
         method : 'POST',
         path : '/user',
         handler : handler.addUserHandler,
-        options: {
-            auth: 'lelang_jwt',
-            validate: {
-                payload: Joi.object({
-                    nama_lengkap: Joi.string().required(),
-                    username: Joi.string().required(),
-                    password: Joi.string().min(8).required(),
-                    telp: Joi.string().required(),
-                })
-            }
-        }
+        // options: {
+        //     auth: 'lelang_jwt',
+        //     validate: {
+        //         payload: Joi.object({
+        //             nama_lengkap: Joi.string().required(),
+        //             username: Joi.string().required(),
+        //             password: Joi.string().min(8).required(),
+        //             telp: Joi.string().required(),
+        //         })
+        //     }
+        // }
     },
     {
         method: 'GET',
         path: '/user',
         handler: handler.getUserHandler,
-        options: {
-            auth: 'lelang_jwt'
-        }
+        // options: {
+        //     auth: 'lelang_jwt'
+        // }
     },
     {
         method: 'GET',
         path: '/user/{username}',
         handler: handler.getUserByUsernameHandler,
-        options: {
-            auth: 'lelang_jwt'
-        }
+        // options: {
+        //     auth: 'lelang_jwt'
+        // }
     },
     {
         method: 'PUT',

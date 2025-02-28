@@ -16,14 +16,14 @@ class AdminHandler{
     }
 
     addAdminHandler = async (request, h) => {
-        const {credentials} = request.auth
+        // const {credentials} = request.auth
 
-        if(credentials.role != "Admin"){
-            return h.response({
-                status: 'fail',
-                message: 'Anda tidak memiliki akses'
-            }).code(401)
-        }
+        // if(credentials.role != "Admin"){
+        //     return h.response({
+        //         status: 'fail',
+        //         message: 'Anda tidak memiliki akses'
+        //     }).code(401)
+        // }
 
         const {username, password} = request.payload
 

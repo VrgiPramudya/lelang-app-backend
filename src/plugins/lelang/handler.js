@@ -76,16 +76,16 @@ class LelangHandler{
     }
 
     getLelangByIdHandler = async(request, h) => {
-        const { role } = request.auth.credentials
+        // const { role } = request.auth.credentials
 
-        if (role != "Admin" && role != "User") {
-            const response = h.response({
-                status: 'fail',
-                message: 'Anda tidak memiliki akses'
-            })
-            response.code(401)
-            return response
-        }
+        // if (role != "Admin" && role != "User") {
+        //     const response = h.response({
+        //         status: 'fail',
+        //         message: 'Anda tidak memiliki akses'
+        //     })
+        //     response.code(401)
+        //     return response
+        // }
 
         const { id } = request.params
         const dataLelang = await this._service.getLelangById(id)

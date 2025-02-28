@@ -57,14 +57,14 @@ class BarangHandler{
     };    
 
     getBarangHandler = async(request, h) => {
-        const {role} = request.auth.credentials
+        // const {role} = request.auth.credentials
 
-        if(role !== "User" && role !== "Petugas" && role !== "Admin"){
-            return h.response({
-                status: 'fail',
-                message: 'Anda tidak memiliki akses'
-            }).code(401);
-        }
+        // if(role !== "User" && role !== "Admin"){
+        //     return h.response({
+        //         status: 'fail',
+        //         message: 'Anda tidak memiliki akses'
+        //     }).code(401);
+        // }
 
         const barang = await this._service.getBarang();
 
