@@ -10,7 +10,6 @@ const routesLelang = (handler) => [
             validate: {
                 payload: Joi.object({
                     id_barang: Joi.number().required(),
-                    tgl_lelang: Joi.date().required(),
                     status: Joi.optional()
                 })
             }
@@ -41,7 +40,6 @@ const routesLelang = (handler) => [
             validate: {    
                 payload: Joi.object({
                     id_barang: Joi.number(),
-                    tgl_lelang: Joi.date(),
                     status: Joi.required()
                 })
             }

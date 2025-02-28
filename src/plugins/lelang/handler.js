@@ -22,9 +22,9 @@ class LelangHandler{
                 return response
             }
 
-            const {id_barang, tgl_lelang, status} = request.payload
+            const {id_barang, status} = request.payload
 
-            await this._service.addLelang({id_barang, tgl_lelang, status})
+            await this._service.addLelang({id_barang, status})
             const cekBarang = await this._service.getBarangById(id);
 
             if (cekBarang.length === 0) {
@@ -115,7 +115,7 @@ class LelangHandler{
             }
 
             const { id } = request.params
-            const {id_barang, tgl_lelang, status} = request.payload
+            const {id_barang, status} = request.payload
 
             const dataLelang = await this._service.getLelangById(id);
 
@@ -127,7 +127,7 @@ class LelangHandler{
                 return response.code(404);
             }
 
-            await this._service.editLelangById(id, {id_barang, tgl_lelang, status})
+            await this._service.editLelangById(id, {id_barang, status})
 
             const response = h.response({
                 status: 'success',

@@ -25,9 +25,9 @@ class PenawaranServices{
                 p.nominal, 
                 u.username, 
                 l.id_lelang, 
-                l.tgl_lelang, 
                 l.status, 
                 b.nama_barang, 
+                b.tanggal,
                 b.harga_awal
             FROM tb_penawaran p
             JOIN tb_lelang l ON p.id_lelang = l.id_lelang
@@ -47,9 +47,9 @@ class PenawaranServices{
                 p.nominal, 
                 u.username, 
                 l.id_lelang, 
-                l.tgl_lelang, 
                 l.status, 
                 b.nama_barang, 
+                b.tanggal,
                 b.harga_awal
             FROM tb_penawaran p
             JOIN tb_lelang l ON p.id_lelang = l.id_lelang

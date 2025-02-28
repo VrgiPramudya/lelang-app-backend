@@ -3,8 +3,8 @@ class LelangServices{
         this._pool = pool;
     }
 
-    async addLelang({id_barang, tgl_lelang, status}){
-        const[result] = await this._pool.execute('INSERT INTO tb_lelang (id_barang, tgl_lelang, status) VALUES (:id_barang, :tgl_lelang, :status)', { id_barang, tgl_lelang, status })
+    async addLelang({id_barang, status}){
+        const[result] = await this._pool.execute('INSERT INTO tb_lelang (id_barang, status) VALUES (:id_barang, :status)', { id_barang, status })
         return result
     }
     
@@ -20,8 +20,8 @@ class LelangServices{
         return rows  
     }
 
-    async editLelangById(id_lelang, {id_barang, tgl_lelang, status}){
-        const[result] = await this._pool.execute('UPDATE tb_lelang SET id_barang=:id_barang, tgl_lelang=:tgl_lelang, status=:status WHERE id_lelang=:id_lelang', {id_barang, tgl_lelang, status, id_lelang})
+    async editLelangById(id_lelang, {id_barang, status}){
+        const[result] = await this._pool.execute('UPDATE tb_lelang SET id_barang=:id_barang, status=:status WHERE id_lelang=:id_lelang', {id_barang, status, id_lelang})
         return result.affectedRows
     }
 
