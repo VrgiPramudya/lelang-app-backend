@@ -59,7 +59,7 @@ class HistoryHandler{
             }
 
             const { id } = request.params
-            const { id_lelang } = request.payload
+            const { id_penawaran } = request.payload
 
             const cekHistory = await this._service.getHistoryById(id);
 
@@ -71,7 +71,7 @@ class HistoryHandler{
                 return response.code(404)
             }
 
-            await this._service.editHistoryById(id, {id_lelang})
+            await this._service.editHistoryById(id, {id_penawaran})
 
             return h.response({
                 status: 'success',
