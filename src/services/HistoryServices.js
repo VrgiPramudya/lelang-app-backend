@@ -11,8 +11,8 @@ class HistoryServices{
     
     async getHistory() {
         const query = `
-            SELECT hl.id_history, p.id_penawaran, l.id_lelang, l.status, 
-            b.id_barang, b.tanggal, b.nama_barang, b.harga_awal, u.user_id, u.nama_lengkap
+            SELECT hl.id_history, p.id_penawaran, p.nominal, l.id_lelang, l.status, 
+            b.id_barang, b.tanggal, b.nama_barang, b.harga_awal, u.user_id, u.nama_lengkap, u.telp
             FROM history_lelang hl
             JOIN tb_penawaran p ON hl.id_penawaran = p.id_penawaran
             JOIN tb_lelang l ON p.id_lelang = l.id_lelang
@@ -26,8 +26,8 @@ class HistoryServices{
 
     async getHistoryById(id_history) {
         const query = `
-            SELECT hl.id_history, p.id_penawaran, l.id_lelang, l.status, 
-            b.id_barang, b.nama_barang, b.tanggal, b.harga_awal, u.user_id, u.nama_lengkap
+            SELECT hl.id_history, p.id_penawaran, p.nominal, l.id_lelang, l.status, 
+            b.id_barang, b.nama_barang, b.tanggal, b.harga_awal, u.user_id, u.nama_lengkap, u.telp
             FROM history_lelang hl
             JOIN tb_penawaran p ON hl.id_penawaran = p.id_penawaran
             JOIN tb_lelang l ON p.id_lelang = l.id_lelang
