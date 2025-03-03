@@ -143,7 +143,7 @@ class BarangHandler {
       }
 
       await this._service.editBarangById(id, {
-        foto: imgPath.split("/")[2],
+        foto: imgPath.split("/")[2] ?? imgPath,
         nama_barang,
         tanggal,
         harga_awal,
