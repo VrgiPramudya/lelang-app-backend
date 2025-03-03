@@ -29,9 +29,9 @@ const TokenManager = require('./tokenize/tokenManager');
 
 const init = async () => {
     const pool = mysql.createPool({
-        host: 'localhost',
+        host: '127.0.0.1',
         user: 'root',
-        password: 'virgi2007btg',
+        password: 'admin',
         database: 'lelangapp',
         waitForConnections: true,
         connectionLimit: 10,
@@ -50,7 +50,7 @@ const init = async () => {
 
     const server = Hapi.server({ 
         port: 2000,
-        host: `0.0.0.0`,
+        host: `localhost`,
         routes: {
             cors: {
                 origin: ['*']
