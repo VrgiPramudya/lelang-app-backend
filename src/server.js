@@ -31,7 +31,7 @@ const init = async () => {
     const pool = mysql.createPool({
         host: '127.0.0.1',
         user: 'root',
-        password: 'admin',
+        password: 'virgi2007btg',
         database: 'lelangapp',
         waitForConnections: true,
         connectionLimit: 10,
