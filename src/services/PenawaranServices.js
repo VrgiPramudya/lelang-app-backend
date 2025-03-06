@@ -23,6 +23,7 @@ class PenawaranServices{
             SELECT 
                 p.id_penawaran, 
                 p.nominal, 
+                u.nama_lengkap,
                 u.username, 
                 l.id_lelang, 
                 l.status, 
@@ -45,6 +46,7 @@ class PenawaranServices{
         const [rows] = await this._pool.execute(`SELECT 
                 p.id_penawaran, 
                 p.nominal, 
+                u.nama_lengkap,
                 u.username, 
                 l.id_lelang, 
                 l.status, 
